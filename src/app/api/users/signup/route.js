@@ -7,7 +7,7 @@ import  axios from "axios";
 connect()
 export async function POST(request){
     try{
-        console.log(user);
+       
         const reqBody=await request.json();
         const {username,email,password}=reqBody;
         console.log("from route",reqBody);

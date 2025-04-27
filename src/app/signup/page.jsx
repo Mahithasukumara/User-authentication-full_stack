@@ -20,11 +20,12 @@ function SignUpPage(){
                 setLoading(true);
                 console.log(user)
                 const response=await axios.post("/api/users/signup",user);
-                console.log("entered data to database:"+response.data);
+                console.log("entered data to database:",response.data);
                 router.push("/login");
             }catch(err){
                 console.log(err);
-                toast.error("error message: "+err.message);
+                toast.error(err.message);
+
      
             }finally{
                 setLoading(false);
