@@ -4,7 +4,7 @@ import React,{useEffect} from 'react';
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import axios from "axios";
-import {toast} from "react-hot-toast";
+import {toast,Toaster} from "react-hot-toast";
 
 function SignUpPage(){
     const router=useRouter();
@@ -21,10 +21,17 @@ function SignUpPage(){
                 console.log(user)
                 const response=await axios.post("/api/users/signup",user);
                 console.log("entered data to database:",response.data);
+                toast.success("User created successfully. Please login to continue.");
                 router.push("/login");
-            }catch(err){
-                console.log(err);
-                toast.error(err.message);
+            }catch(error){
+                console.log(error);
+                if (error.response && error.response.data && error.response.data.error) {
+                    // console.log("exists")
+                    toast.error(error.response.data.error);
+                } else {
+                    toast.error("Something went wrong. Please try again.");
+                }
+                
 
      
             }finally{
@@ -42,6 +49,8 @@ function SignUpPage(){
     },[user])
     return (
         <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100">
+            <Toaster position="top-center" reverseOrder={false} />
+
          <div className="bg-white p-8 rounded-2xl shadow-lg w-80">
                 <h1 className="text-2xl font-bold mb-6 text-center">
                     {loading?"Processing page":"Signup here"}</h1>
