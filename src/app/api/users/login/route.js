@@ -43,7 +43,7 @@ export async function POST(request){
                 success:true,
             }
         )
-        response.cookies.set("tokenbrowser",token,
+        response.cookies.set("token",token,
            { httpOnly:true},
         )
         return response;
