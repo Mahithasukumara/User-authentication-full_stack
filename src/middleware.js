@@ -7,6 +7,7 @@ export function middleware(request){
    if(isPublicPath && token){
     return NextResponse.redirect(new URL('/',request.nextUrl))
    }
+   //if its profile page and no token exist
    if (!isPublicPath && !token){
     return NextResponse.redirect(new URL('/login',request.nextUrl))
    }
